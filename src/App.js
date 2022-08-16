@@ -1,23 +1,71 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import CreateTodo from "./components/CreateTodo/CreateTodo";
+import Profile from "./components/Profile/Profile";
+import ToDoList from "./components/ToDoList/ToDoList";
 
 function App() {
+  const [page, setPage] = useState("create-to-do");
+  const [currentTodo, setCurrentTodo] = useState(-1); // 2
+  const [todoList, settodoList] = useState([
+    {
+      text: "buy groceries",
+    },
+    {
+      text: "take session",
+    },
+    {
+      text: "call dad",
+    },
+  ]);
+
+  const onClickHandler = (myTodo) => {
+    // existing
+    if (currentTodo !== -1) {
+      const updatedTodoList = todoList.map((eachTodo, index) => {
+        if (index === currentTodo) {
+          return {
+            text: myTodo,
+          };
+        }
+        return eachTodo;
+      });
+      settodoList(updatedTodoList);
+    }
+    // new
+    else {
+      settodoList([...todoList, { text: myTodo }]);
+    }
+    setPage("to-do-list");
+  };
+
+  const existingTodoText = () => {
+    const findText = todoList.find(
+      (eachTodoItem, index) => index === currentTodo
+    );
+    return findText ? findText.text : "";
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <Profile />
+      {page === "create-to-do" ? (
+        <CreateTodo
+          onClickHandler={onClickHandler}
+          currentTodo={currentTodo}
+          existingTodoText={existingTodoText()}
+        />
+      ) : (
+        <ToDoList
+          todoList={todoList}
+          onAddTodo={() => {
+            setCurrentTodo(-1);
+            setPage("create-to-do");
+          }}
+          setCurrentTodo={setCurrentTodo}
+          setPage={setPage}
+        />
+      )}
     </div>
   );
 }

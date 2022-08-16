@@ -1,0 +1,56 @@
+.profile-container {
+    flex: 1;
+    background-color: whitesmoke;
+}
+
+.avatar-image {
+    width: 10rem;
+    height: 10rem;
+    background: deepskyblue;
+    margin-top: 5rem;
+    border-radius: 15rem;
+}
+
+.avatar-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.title-wrapper {
+    font-size: 1.5rem;
+    color: rgb(15, 192, 252);
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.time-date-details-wrapper {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    color: rgb(72, 72, 72);
+}
+
+@media screen and (max-width: 900px) {
+    .avatar-image {
+        width: 5rem;
+        height: 5rem;
+        background: deepskyblue;
+        margin-top: 0rem;
+        border-radius: 15rem;
+    }
+
+    .time-date-details-wrapper {
+        font-size: 1rem;
+        line-height: 2rem;
+        font-weight: 500;
+        margin-top: 0rem;
+        display: flex;
+        justify-content: center;
+        color: rgb(72, 72, 72);
+    }
+
+    .title-wrapper {
+        margin-top: 1rem;
+    }
+}
