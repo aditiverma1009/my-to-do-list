@@ -26,6 +26,8 @@ const CreateTodo = ({ onClickHandler, currentTodoIndex, existingTodoText }) => {
 
 CreateTodo.propTypes = {
   onClickHandler: PropTypes.func,
+  currentTodoIndex: PropTypes.number,
+  existingTodoText: PropTypes.string,
 };
 
 export default CreateTodo;
