@@ -6,7 +6,7 @@ import ToDoList from "./components/ToDoList/ToDoList";
 
 function App() {
   const [page, setPage] = useState("create-to-do");
-  const [currentTodo, setCurrentTodo] = useState(-1); // 2
+  const [currentTodoIndex, setCurrentTodo] = useState(-1); // 2
   const [todoList, settodoList] = useState([
     {
       text: "buy groceries",
@@ -21,9 +21,9 @@ function App() {
 
   const onClickHandler = (myTodo) => {
     // existing
-    if (currentTodo !== -1) {
+    if (currentTodoIndex !== -1) {
       const updatedTodoList = todoList.map((eachTodo, index) => {
-        if (index === currentTodo) {
+        if (index === currentTodoIndex) {
           return {
             text: myTodo,
           };
@@ -41,7 +41,7 @@ function App() {
 
   const existingTodoText = () => {
     const findText = todoList.find(
-      (eachTodoItem, index) => index === currentTodo
+      (eachTodoItem, index) => index === currentTodoIndex
     );
     return findText ? findText.text : "";
   };
@@ -52,7 +52,7 @@ function App() {
       {page === "create-to-do" ? (
         <CreateTodo
           onClickHandler={onClickHandler}
-          currentTodo={currentTodo}
+          currentTodoIndex={currentTodoIndex}
           existingTodoText={existingTodoText()}
         />
       ) : (

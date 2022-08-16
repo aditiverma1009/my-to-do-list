@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "./CreateTodo.css";
 
-const CreateTodo = ({ onClickHandler, currentTodo, existingTodoText }) => {
+const CreateTodo = ({ onClickHandler, currentTodoIndex, existingTodoText }) => {
   const [myTodo, setMyTodo] = useState(
-    currentTodo === -1 ? "" : existingTodoText
+    currentTodoIndex === -1 ? "" : existingTodoText
   );
 
   const onTextChange = (event) => {
@@ -16,7 +16,7 @@ const CreateTodo = ({ onClickHandler, currentTodo, existingTodoText }) => {
       <h1>CreateTodo</h1>
       <textarea value={myTodo} onChange={onTextChange} />
       <div>
-        <button onClick={() => onClickHandler(myTodo, currentTodo)}>
+        <button onClick={() => onClickHandler(myTodo, currentTodoIndex)}>
           Submit
         </button>
       </div>
