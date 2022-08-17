@@ -3,6 +3,7 @@ import "./App.css";
 import CreateTodo from "./components/CreateTodo/CreateTodo";
 import Profile from "./components/Profile/Profile";
 import ToDoList from "./components/ToDoList/ToDoList";
+import { UserContext, userData } from "./context/user-context";
 
 function App() {
   const [page, setPage] = useState("create-to-do");
@@ -47,26 +48,28 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <Profile />
-      {page === "create-to-do" ? (
-        <CreateTodo
-          onClickHandler={onClickHandler}
-          currentTodoIndex={currentTodoIndex}
-          existingTodoText={existingTodoText()}
-        />
-      ) : (
-        <ToDoList
-          todoList={todoList}
-          onAddTodo={() => {
-            setCurrentTodo(-1);
-            setPage("create-to-do");
-          }}
-          setCurrentTodo={setCurrentTodo}
-          setPage={setPage}
-        />
-      )}
-    </div>
+    <UserContext.Provider value={userData}>
+      <div className="app-container">
+        <Profile />
+        {page === "create-to-do" ? (
+          <CreateTodo
+            onClickHandler={onClickHandler}
+            currentTodoIndex={currentTodoIndex}
+            existingTodoText={existingTodoText()}
+          />
+        ) : (
+          <ToDoList
+            todoList={todoList}
+            onAddTodo={() => {
+              setCurrentTodo(-1);
+              setPage("create-to-do");
+            }}
+            setCurrentTodo={setCurrentTodo}
+            setPage={setPage}
+          />
+        )}
+      </div>
+    </UserContext.Provider>
   );
 }
 
